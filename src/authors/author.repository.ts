@@ -1,7 +1,7 @@
 import { Repository, EntityRepository, UpdateResult, ObjectID } from '../../node_modules/typeorm';
 import { Author } from './author.entity';
 import { CreateAuthorDto } from './dto/create-author.dto';
-import { NotFoundException, HttpException, HttpStatus } from '../../node_modules/@nestjs/common';
+import { NotFoundException } from '../../node_modules/@nestjs/common';
 
 @EntityRepository(Author)
 export class AuthorRepository extends Repository<Author> {
