@@ -25,11 +25,13 @@ export class AuthorRepository extends Repository<Author> {
   async updateAuthor(
     id: ObjectID,
     createAuthorDto: CreateAuthorDto,
-  ): Promise<UpdateResult> {
-    return await this.update(id, {
+  ): Promise<string> {
+    await this.update(id, {
       ...createAuthorDto,
       updatedAt: new Date().toISOString(),
     });
+
+    return 'OK';
   }
 
   async deleteAuthor(id: ObjectID): Promise<void> {

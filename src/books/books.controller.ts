@@ -1,4 +1,15 @@
-import { Controller, Get, Param, UsePipes, Post, Body, ValidationPipe, Delete, HttpCode, Put } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  UsePipes,
+  Post,
+  Body,
+  ValidationPipe,
+  Delete,
+  HttpCode,
+  Put,
+} from '@nestjs/common';
 import { BooksService } from './books.service';
 import { ObjectID } from '../../node_modules/typeorm';
 import { IdValidationPipe } from '../shared/pipes/id-validation.pipe';
@@ -12,7 +23,7 @@ export class BooksController {
   @Get()
   getAllBooksByAuthor(
     @Param('authorId', IdValidationPipe) authorId: ObjectID,
-  ) {
+  ): Promise<Book[]> {
     return this.booksService.getAllBooksByAuthor(authorId);
   }
 
@@ -21,7 +32,7 @@ export class BooksController {
   getBookById(
     @Param('authorId') authorId: ObjectID,
     @Param('bookId') bookId: ObjectID,
-  ) {
+  ): Promise<Book> {
     return this.booksService.getBookById(authorId, bookId);
   }
 
@@ -38,7 +49,7 @@ export class BooksController {
     @Param('authorId', IdValidationPipe) autorId: ObjectID,
     @Param('bookId', IdValidationPipe) bookId: ObjectID,
     @Body(ValidationPipe) createBookDto: CreateBookDto,
-  ) {
+  ): Promise<string> {
     return this.booksService.updateBook(autorId, bookId, createBookDto);
   }
 

@@ -33,7 +33,7 @@ export class AuthorsService {
   async updateAuthor(
     id: ObjectID,
     createAuthorDto: CreateAuthorDto,
-  ): Promise<UpdateResult> {
+  ): Promise<string> {
     return await this.authorRepository.updateAuthor(id, createAuthorDto);
   }
 
