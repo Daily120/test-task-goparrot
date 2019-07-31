@@ -1,4 +1,4 @@
-import { BaseEntity, Entity, ObjectID, ObjectIdColumn, Column } from 'typeorm';
+import { BaseEntity, Entity, ObjectID, ObjectIdColumn, Column, UpdateDateColumn, CreateDateColumn } from 'typeorm';
 
 @Entity()
 export class Author extends BaseEntity {
@@ -14,13 +14,9 @@ export class Author extends BaseEntity {
   @Column()
   birthday: Date;
 
-  @Column({
-    default: Date(),
-  })
+  @CreateDateColumn()
   createdAt: Date;
 
-  @Column({
-    default: Date(),
-  })
+  @UpdateDateColumn()
   updatedAt: Date;
 }
