@@ -30,7 +30,10 @@ export class AuthorsService {
     return await this.authorRepository.createAuthor(createAuthorDto);
   }
 
-  async updateAuthor(id: ObjectID, createAuthorDto: CreateAuthorDto): Promise<UpdateResult> {
+  async updateAuthor(
+    id: ObjectID,
+    createAuthorDto: CreateAuthorDto,
+  ): Promise<UpdateResult> {
     return await this.authorRepository.updateAuthor(id, createAuthorDto);
   }
 

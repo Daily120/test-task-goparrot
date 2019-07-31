@@ -1,4 +1,14 @@
-import { BaseEntity, Entity, ObjectID, ObjectIdColumn, Column, UpdateDateColumn, CreateDateColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Entity,
+  ObjectID,
+  ObjectIdColumn,
+  Column,
+  UpdateDateColumn,
+  CreateDateColumn,
+  OneToMany,
+} from 'typeorm';
+import { Book } from '../books/book.entity';
 
 @Entity()
 export class Author extends BaseEntity {
@@ -19,4 +29,7 @@ export class Author extends BaseEntity {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  // @OneToMany(type => Book, book => book.author, {eager: true})
+  // books: Book[];
 }
