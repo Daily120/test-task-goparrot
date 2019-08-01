@@ -6,22 +6,11 @@ import {
 } from '../../node_modules/typeorm';
 import { Author } from './author.entity';
 import { CreateAuthorDto } from './dto/create-author.dto';
-import { NotFoundException } from '../../node_modules/@nestjs/common';
 
 @EntityRepository(Author)
 export class AuthorRepository extends Repository<Author> {
   async getAllAuthors(): Promise<Author[]> {
     return await this.find();
-  }
-
-  async getAuthorById(id: ObjectID): Promise<Author> {
-    const found = await this.findOne(id);
-
-    if (!found) {
-      throw new NotFoundException(`Author with ID "${id}" not found`);
-    }
-
-    return found;
   }
 
   async createAuthor(createAuthorDto: CreateAuthorDto): Promise<Author> {
@@ -46,14 +35,5 @@ export class AuthorRepository extends Repository<Author> {
     });
 
     return 'OK';
-  }
-
-  async deleteAuthor(id: ObjectID): Promise<void> {
-    const result = await this.delete(id);
-
-    // doesn't work with typeorm&mongo
-    if (result.affected === 0) {
-      throw new NotFoundException(`Task with ID "${id}" not found`);
-    }
   }
 }

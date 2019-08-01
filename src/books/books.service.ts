@@ -16,8 +16,14 @@ export class BooksService {
     return await this.bookRepository.getAllBooksByAuthor(authorId);
   }
 
-  async getBookById(authorId: ObjectID, bookId: ObjectID): Promise<Book> {
-    return await this.bookRepository.getBookById(authorId, bookId);
+  async getBookById(authorId: ObjectID, id: ObjectID): Promise<Book> {
+    const found = await this.bookRepository.findOne(id);
+
+    if (!found || found.author !== authorId) {
+      throw new NotFoundException();
+    }
+
+    return found;
   }
 
   async createBook(

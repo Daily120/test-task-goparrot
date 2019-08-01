@@ -5,9 +5,9 @@ import { NotFoundException } from '../../node_modules/@nestjs/common';
 
 const mockAuthorRepository = () => ({
   getAllAuthors: jest.fn(),
-  getAuthorById: jest.fn(),
   createAuthor: jest.fn(),
   updateAuthor: jest.fn(),
+  findOne: jest.fn(),
   deleteAuthor: jest.fn(),
   delete: jest.fn(),
 });
@@ -39,22 +39,22 @@ describe('AuthorsService', () => {
     });
   });
 
-  // describe('getAuthorById', () => {
-  //   it('calls authorRepository.findOne() and succesffuly retrieve and return the author', async () => {
-  //     const mockAuthor = { firstName: 'Test', lastName: 'TestLast', birthday: new Date().toISOString() };
-  //     authorRepository.getAuthorById.mockResolvedValue(mockAuthor);
+  describe('getAuthorById', () => {
+    it('calls authorRepository.findOne() and succesffuly retrieve and return the author', async () => {
+      const mockAuthor = { firstName: 'Test', lastName: 'TestLast', birthday: new Date().toISOString() };
+      authorRepository.findOne.mockResolvedValue(mockAuthor);
 
-  //     const result = await authorsService.getAuthorById(1);
-  //     expect(result).toEqual(mockAuthor);
+      const result = await authorsService.getAuthorById(1);
+      expect(result).toEqual(mockAuthor);
 
-  //     expect(authorRepository.getAuthorById).toHaveBeenCalledWith(1);
-  //   });
+      expect(authorRepository.findOne).toHaveBeenCalledWith(1);
+    });
 
-  //   it('throws an error as author is not found', () => {
-  //     authorRepository.getAuthorById.mockResolvedValue(null);
-  //     expect(authorsService.getAuthorById(1)).rejects.toThrow(NotFoundException);
-  //   });
-  // });
+    it('throws an error as author is not found', () => {
+      authorRepository.findOne.mockResolvedValue(null);
+      expect(authorsService.getAuthorById(1)).rejects.toThrow(NotFoundException);
+    });
+  });
 
   describe('createAuthor', () => {
     it('calls authorRepository.createAuthor() and returns the result', async () => {

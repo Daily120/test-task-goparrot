@@ -5,7 +5,6 @@ import {
 } from '../../node_modules/typeorm';
 import { Book } from './book.entity';
 import { CreateBookDto } from './dto/create-book.dto';
-import { NotFoundException } from '../../node_modules/@nestjs/common';
 
 @EntityRepository(Book)
 export class BookRepository extends Repository<Book> {
@@ -31,16 +30,6 @@ export class BookRepository extends Repository<Book> {
     return books;
   }
 
-  async getBookById(authorId: ObjectID, id: ObjectID): Promise<Book> {
-    const found = await this.findOne(id);
-
-    if (!found || found.author !== authorId) {
-      throw new NotFoundException();
-    }
-
-    return found;
-  }
-
   async updateBook(
     authorId: ObjectID,
     id: ObjectID,
@@ -52,14 +41,5 @@ export class BookRepository extends Repository<Book> {
     });
 
     return 'OK';
-  }
-
-  async deleteBook(authorId: ObjectID, id: ObjectID): Promise<void> {
-    const result = await this.delete(id);
-
-    // doesn't work with typeorm&mongo
-    if (result.affected === 0) {
-      throw new NotFoundException(`Task with ID "${id}" not found`);
-    }
   }
 }

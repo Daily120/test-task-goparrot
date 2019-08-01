@@ -17,7 +17,13 @@ export class AuthorsService {
   }
 
   async getAuthorById(id: ObjectID): Promise<Author> {
-    return this.authorRepository.getAuthorById(id);
+    const found = await this.authorRepository.findOne(id);
+
+    if (!found) {
+      throw new NotFoundException(`Author with ID "${id}" not found`);
+    }
+
+    return found;
   }
 
   async createAuthor(createAuthorDto: CreateAuthorDto): Promise<Author> {

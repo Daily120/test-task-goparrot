@@ -41,22 +41,22 @@ describe('BooksService', () => {
     });
   });
 
-  // describe('getBookById', () => {
-  //   it('calls bookRepository.getBookById() and succesffuly retrieve and return the Book', async () => {
-  //     const mockBook = { title: 'Test', iban: 546545656263665, author: 1, publishedAt: new Date().toISOString() };
-  //     bookRepository.findOne.mockResolvedValue(mockBook);
+  describe('getBookById', () => {
+    it('calls bookRepository.getBookById() and succesffuly retrieve and return the Book', async () => {
+      const mockBook = { title: 'Test', iban: 546545656263665, author: 1, publishedAt: new Date().toISOString() };
+      bookRepository.findOne.mockResolvedValue(mockBook);
 
-  //     const result = await booksService.getBookById(1, 1);
-  //     expect(result).toEqual(mockBook);
+      const result = await booksService.getBookById(1, 1);
+      expect(result).toEqual(mockBook);
 
-  //     expect(bookRepository.findOne).toHaveBeenCalledWith(1);
-  //   });
+      expect(bookRepository.findOne).toHaveBeenCalledWith(1);
+    });
 
-  //   it('throws an error as Book is not found', () => {
-  //     bookRepository.findOne.mockResolvedValue(null);
-  //     expect(booksService.getBookById(1, 1)).rejects.toThrow(NotFoundException);
-  //   });
-  // });
+    it('throws an error as Book is not found', () => {
+      bookRepository.findOne.mockResolvedValue(null);
+      expect(booksService.getBookById(1, 1)).rejects.toThrow(NotFoundException);
+    });
+  });
 
   describe('createBook', () => {
     it('calls bookRepository.createBook() and returns the result', async () => {
