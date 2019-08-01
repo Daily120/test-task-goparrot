@@ -7,10 +7,12 @@ import {
   Column,
   ObjectIdColumn,
   ManyToOne,
+  Unique,
 } from 'typeorm';
 import { Author } from '../authors/author.entity';
 
 @Entity()
+@Unique(['iban'])
 export class Book extends BaseEntity {
   @ObjectIdColumn()
   id: ObjectID;

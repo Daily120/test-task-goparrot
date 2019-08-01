@@ -4,6 +4,7 @@ import {
 } from 'typeorm';
 import { Book } from './book.entity';
 import { CreateBookDto } from './dto/create-book.dto';
+import { ConflictException } from '../../node_modules/@nestjs/common';
 
 @EntityRepository(Book)
 export class BookRepository extends Repository<Book> {
@@ -18,7 +19,11 @@ export class BookRepository extends Repository<Book> {
     book.iban = iban;
     book.publishedAt = publishedAt;
     book.author = authorId;
-    await book.save();
+    try {
+      await book.save();
+    } catch (e) {
+      throw new ConflictException();
+    }
 
     return book;
   }
