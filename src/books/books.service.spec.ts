@@ -43,7 +43,12 @@ describe('BooksService', () => {
 
   describe('getBookById', () => {
     it('calls bookRepository.getBookById() and succesffuly retrieve and return the Book', async () => {
-      const mockBook = { title: 'Test', iban: 546545656263665, author: 1, publishedAt: new Date().toISOString() };
+      const mockBook = {
+        title: 'Test',
+        iban: 546545656263665,
+        author: 1,
+        publishedAt: new Date().toISOString(),
+      };
       bookRepository.findOne.mockResolvedValue(mockBook);
 
       const result = await booksService.getBookById(1, 1);
@@ -63,7 +68,11 @@ describe('BooksService', () => {
       bookRepository.createBook.mockResolvedValue('someBook');
 
       expect(bookRepository.createBook).not.toHaveBeenCalled();
-      const createBookDto = { title: 'Test', iban: 546545656263665, publishedAt: new Date().toISOString() };
+      const createBookDto = {
+        title: 'Test',
+        iban: 546545656263665,
+        publishedAt: new Date().toISOString(),
+      };
       const result = await booksService.createBook(1, createBookDto);
       expect(bookRepository.createBook).toHaveBeenCalledWith(1, createBookDto);
       expect(result).toEqual('someBook');
@@ -89,9 +98,17 @@ describe('BooksService', () => {
       bookRepository.updateBook.mockResolvedValue('newBook');
 
       expect(bookRepository.updateBook).not.toHaveBeenCalled();
-      const createBookDto = { title: 'Test', iban: 546545656263665, publishedAt: new Date().toISOString() };
+      const createBookDto = {
+        title: 'Test',
+        iban: 546545656263665,
+        publishedAt: new Date().toISOString(),
+      };
       const result = await booksService.updateBook(1, 1, createBookDto);
-      expect(bookRepository.updateBook).toHaveBeenCalledWith(1, 1, createBookDto);
+      expect(bookRepository.updateBook).toHaveBeenCalledWith(
+        1,
+        1,
+        createBookDto,
+      );
       expect(result).toEqual('newBook');
     });
   });

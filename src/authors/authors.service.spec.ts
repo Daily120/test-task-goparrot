@@ -41,7 +41,11 @@ describe('AuthorsService', () => {
 
   describe('getAuthorById', () => {
     it('calls authorRepository.findOne() and succesffuly retrieve and return the author', async () => {
-      const mockAuthor = { firstName: 'Test', lastName: 'TestLast', birthday: new Date().toISOString() };
+      const mockAuthor = {
+        firstName: 'Test',
+        lastName: 'TestLast',
+        birthday: new Date().toISOString(),
+      };
       authorRepository.findOne.mockResolvedValue(mockAuthor);
 
       const result = await authorsService.getAuthorById(1);
@@ -52,7 +56,9 @@ describe('AuthorsService', () => {
 
     it('throws an error as author is not found', () => {
       authorRepository.findOne.mockResolvedValue(null);
-      expect(authorsService.getAuthorById(1)).rejects.toThrow(NotFoundException);
+      expect(authorsService.getAuthorById(1)).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 
@@ -61,9 +67,15 @@ describe('AuthorsService', () => {
       authorRepository.createAuthor.mockResolvedValue('someauthor');
 
       expect(authorRepository.createAuthor).not.toHaveBeenCalled();
-      const createAuthorDto = { firstName: 'Test', lastName: 'TestLast', birthday: new Date().toISOString() };
+      const createAuthorDto = {
+        firstName: 'Test',
+        lastName: 'TestLast',
+        birthday: new Date().toISOString(),
+      };
       const result = await authorsService.createAuthor(createAuthorDto);
-      expect(authorRepository.createAuthor).toHaveBeenCalledWith(createAuthorDto);
+      expect(authorRepository.createAuthor).toHaveBeenCalledWith(
+        createAuthorDto,
+      );
       expect(result).toEqual('someauthor');
     });
   });
@@ -87,9 +99,16 @@ describe('AuthorsService', () => {
       authorRepository.updateAuthor.mockResolvedValue('newauthor');
 
       expect(authorRepository.updateAuthor).not.toHaveBeenCalled();
-      const createAuthorDto = { firstName: 'Test', lastName: 'TestLast', birthday: new Date().toISOString() };
+      const createAuthorDto = {
+        firstName: 'Test',
+        lastName: 'TestLast',
+        birthday: new Date().toISOString(),
+      };
       const result = await authorsService.updateAuthor(1, createAuthorDto);
-      expect(authorRepository.updateAuthor).toHaveBeenCalledWith(1, createAuthorDto);
+      expect(authorRepository.updateAuthor).toHaveBeenCalledWith(
+        1,
+        createAuthorDto,
+      );
       expect(result).toEqual('newauthor');
     });
   });
