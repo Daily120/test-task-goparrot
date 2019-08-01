@@ -39,22 +39,22 @@ describe('AuthorsService', () => {
     });
   });
 
-  describe('getAuthorById', () => {
-    it('calls authorRepository.findOne() and succesffuly retrieve and return the author', async () => {
-      const mockAuthor = { firstName: 'Test', lastName: 'TestLast', birthday: new Date().toISOString() };
-      authorRepository.getAuthorById.mockResolvedValue(mockAuthor);
+  // describe('getAuthorById', () => {
+  //   it('calls authorRepository.findOne() and succesffuly retrieve and return the author', async () => {
+  //     const mockAuthor = { firstName: 'Test', lastName: 'TestLast', birthday: new Date().toISOString() };
+  //     authorRepository.getAuthorById.mockResolvedValue(mockAuthor);
 
-      const result = await authorsService.getAuthorById(1);
-      expect(result).toEqual(mockAuthor);
+  //     const result = await authorsService.getAuthorById(1);
+  //     expect(result).toEqual(mockAuthor);
 
-      expect(authorRepository.getAuthorById).toHaveBeenCalledWith(1);
-    });
+  //     expect(authorRepository.getAuthorById).toHaveBeenCalledWith(1);
+  //   });
 
-    it('throws an error as author is not found', () => {
-      authorRepository.getAuthorById.mockResolvedValue(null);
-      expect(authorsService.getAuthorById(1)).rejects.toThrow(NotFoundException);
-    });
-  });
+  //   it('throws an error as author is not found', () => {
+  //     authorRepository.getAuthorById.mockResolvedValue(null);
+  //     expect(authorsService.getAuthorById(1)).rejects.toThrow(NotFoundException);
+  //   });
+  // });
 
   describe('createAuthor', () => {
     it('calls authorRepository.createAuthor() and returns the result', async () => {
@@ -71,9 +71,9 @@ describe('AuthorsService', () => {
   describe('deleteAuthor', () => {
     it('calls AuthorRepository.deleteAuthor() to delete an Author', async () => {
       authorRepository.delete.mockResolvedValue({ affected: 1 });
-      expect(authorRepository.deleteAuthor).not.toHaveBeenCalled();
+      expect(authorRepository.delete).not.toHaveBeenCalled();
       await authorsService.deleteAuthor(1);
-      expect(authorRepository.deleteAuthor).toHaveBeenCalledWith(1);
+      expect(authorRepository.delete).toHaveBeenCalledWith(1);
     });
 
     it('throws an error as Author could not be found', () => {

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '../../node_modules/@nestjs/typeorm';
 import { BookRepository } from './book.repository';
 import { ObjectID } from '../../node_modules/typeorm';
@@ -40,6 +40,11 @@ export class BooksService {
   }
 
   async deleteBook(authorId: ObjectID, id: ObjectID): Promise<void> {
-    return await this.bookRepository.deleteBook(authorId, id);
+    const result = await this.bookRepository.delete(id);
+
+    // doesn't work with typeorm&mongo
+    if (result.affected === 0) {
+      throw new NotFoundException(`Task with ID "${id}" not found`);
+    }
   }
 }

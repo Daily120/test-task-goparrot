@@ -32,6 +32,11 @@ export class AuthorsService {
   }
 
   async deleteAuthor(id: ObjectID): Promise<void> {
-    return this.authorRepository.deleteAuthor(id);
+    const result = await this.authorRepository.delete(id);
+
+    // doesn't work with typeorm&mongo
+    if (result.affected === 0) {
+      throw new NotFoundException(`Task with ID "${id}" not found`);
+    }
   }
 }
