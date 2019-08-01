@@ -4,11 +4,14 @@ import {
   IsNumberString,
   IsDateString,
 } from 'class-validator';
+import { ApiModelProperty } from '@nestjs/swagger';
 
 export class CreateBookDto {
+  @ApiModelProperty()
   @IsNotEmpty()
   title: string;
 
+  @ApiModelProperty()
   @IsNotEmpty()
   @IsNumberString()
   @Length(16, 34, {
@@ -16,6 +19,7 @@ export class CreateBookDto {
   })
   iban: string;
 
+  @ApiModelProperty()
   @IsDateString()
   publishedAt: Date;
 }

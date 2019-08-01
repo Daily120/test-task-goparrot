@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { AuthorRepository } from './author.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Author } from './author.entity';
-import { ObjectID, UpdateResult } from 'typeorm';
+import { UpdateResult } from 'typeorm';
 import { CreateAuthorDto } from './dto/create-author.dto';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class AuthorsService {
     return await this.authorRepository.getAllAuthors();
   }
 
-  async getAuthorById(id: ObjectID): Promise<Author> {
+  async getAuthorById(id: string): Promise<Author> {
     const found = await this.authorRepository.findOne(id);
 
     if (!found) {
@@ -31,13 +31,13 @@ export class AuthorsService {
   }
 
   async updateAuthor(
-    id: ObjectID,
+    id: string,
     createAuthorDto: CreateAuthorDto,
   ): Promise<string> {
     return await this.authorRepository.updateAuthor(id, createAuthorDto);
   }
 
-  async deleteAuthor(id: ObjectID): Promise<void> {
+  async deleteAuthor(id: string): Promise<void> {
     const result = await this.authorRepository.delete(id);
 
     // doesn't work with typeorm&mongo

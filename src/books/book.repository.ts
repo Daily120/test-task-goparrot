@@ -1,7 +1,6 @@
 import {
   EntityRepository,
   Repository,
-  ObjectID,
 } from 'typeorm';
 import { Book } from './book.entity';
 import { CreateBookDto } from './dto/create-book.dto';
@@ -9,7 +8,7 @@ import { CreateBookDto } from './dto/create-book.dto';
 @EntityRepository(Book)
 export class BookRepository extends Repository<Book> {
   async createBook(
-    authorId: ObjectID,
+    authorId: string,
     createBookDto: CreateBookDto,
   ): Promise<Book> {
     const { title, iban, publishedAt } = createBookDto;
@@ -24,15 +23,15 @@ export class BookRepository extends Repository<Book> {
     return book;
   }
 
-  async getAllBooksByAuthor(authorId: ObjectID): Promise<Book[]> {
+  async getAllBooksByAuthor(authorId: string): Promise<Book[]> {
     const books = await this.find({ author: authorId });
 
     return books;
   }
 
   async updateBook(
-    authorId: ObjectID,
-    id: ObjectID,
+    authorId: string,
+    id: string,
     createBookDto: CreateBookDto,
   ) {
     await this.update(id, {

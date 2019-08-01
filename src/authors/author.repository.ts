@@ -2,7 +2,6 @@ import {
   Repository,
   EntityRepository,
   UpdateResult,
-  ObjectID,
 } from 'typeorm';
 import { Author } from './author.entity';
 import { CreateAuthorDto } from './dto/create-author.dto';
@@ -26,7 +25,7 @@ export class AuthorRepository extends Repository<Author> {
   }
 
   async updateAuthor(
-    id: ObjectID,
+    id: string,
     createAuthorDto: CreateAuthorDto,
   ): Promise<string> {
     await this.update(id, {

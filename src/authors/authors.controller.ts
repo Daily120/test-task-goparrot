@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { AuthorsService } from './authors.service';
 import { Author } from './author.entity';
-import { ObjectID, UpdateResult } from 'typeorm';
+import { UpdateResult } from 'typeorm';
 import { IdValidationPipe } from '../shared/pipes/id-validation.pipe';
 import { CreateAuthorDto } from './dto/create-author.dto';
 
@@ -26,7 +26,7 @@ export class AuthorsController {
   }
 
   @Get('/:id')
-  getAuthorById(@Param('id', IdValidationPipe) id: ObjectID): Promise<Author> {
+  getAuthorById(@Param('id', IdValidationPipe) id: string): Promise<Author> {
     return this.authorsService.getAuthorById(id);
   }
 
@@ -38,7 +38,7 @@ export class AuthorsController {
 
   @Put('/:id')
   updateAuthor(
-    @Param('id', IdValidationPipe) id: ObjectID,
+    @Param('id', IdValidationPipe) id: string,
     @Body(ValidationPipe) createAuthorDto: CreateAuthorDto,
   ): Promise<string> {
     return this.authorsService.updateAuthor(id, createAuthorDto);
@@ -46,7 +46,7 @@ export class AuthorsController {
 
   @Delete('/:id')
   @HttpCode(204)
-  deleteAuthor(@Param('id', IdValidationPipe) id: ObjectID): Promise<void> {
+  deleteAuthor(@Param('id', IdValidationPipe) id: string): Promise<void> {
     return this.authorsService.deleteAuthor(id);
   }
 }

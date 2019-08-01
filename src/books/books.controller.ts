@@ -11,7 +11,6 @@ import {
   Put,
 } from '@nestjs/common';
 import { BooksService } from './books.service';
-import { ObjectID } from 'typeorm';
 import { IdValidationPipe } from '../shared/pipes/id-validation.pipe';
 import { CreateBookDto } from './dto/create-book.dto';
 import { Book } from './book.entity';
@@ -22,7 +21,7 @@ export class BooksController {
 
   @Get()
   getAllBooksByAuthor(
-    @Param('authorId', IdValidationPipe) authorId: ObjectID,
+    @Param('authorId', IdValidationPipe) authorId: string,
   ): Promise<Book[]> {
     return this.booksService.getAllBooksByAuthor(authorId);
   }
@@ -30,15 +29,15 @@ export class BooksController {
   @Get('/:bookId')
   @UsePipes(IdValidationPipe)
   getBookById(
-    @Param('authorId') authorId: ObjectID,
-    @Param('bookId') bookId: ObjectID,
+    @Param('authorId') authorId: string,
+    @Param('bookId') bookId: string,
   ): Promise<Book> {
     return this.booksService.getBookById(authorId, bookId);
   }
 
   @Post()
   createBook(
-    @Param('authorId', IdValidationPipe) authorId: ObjectID,
+    @Param('authorId', IdValidationPipe) authorId: string,
     @Body(ValidationPipe) createBookDto: CreateBookDto,
   ): Promise<Book> {
     return this.booksService.createBook(authorId, createBookDto);
@@ -46,8 +45,8 @@ export class BooksController {
 
   @Put('/:bookId')
   updateBook(
-    @Param('authorId', IdValidationPipe) autorId: ObjectID,
-    @Param('bookId', IdValidationPipe) bookId: ObjectID,
+    @Param('authorId', IdValidationPipe) autorId: string,
+    @Param('bookId', IdValidationPipe) bookId: string,
     @Body(ValidationPipe) createBookDto: CreateBookDto,
   ): Promise<string> {
     return this.booksService.updateBook(autorId, bookId, createBookDto);
@@ -57,8 +56,8 @@ export class BooksController {
   @UsePipes(IdValidationPipe)
   @HttpCode(204)
   deleteBook(
-    @Param('authorId') authorId: ObjectID,
-    @Param('bookId') bookId: ObjectID,
+    @Param('authorId') authorId: string,
+    @Param('bookId') bookId: string,
   ): Promise<void> {
     return this.booksService.deleteBook(authorId, bookId);
   }

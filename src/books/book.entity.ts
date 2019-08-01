@@ -34,5 +34,5 @@ export class Book extends BaseEntity {
   // author: Author;
 
   @Column('rowid')
-  author: ObjectID;
+  author: string;
 }

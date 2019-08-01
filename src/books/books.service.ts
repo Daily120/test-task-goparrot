@@ -1,7 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BookRepository } from './book.repository';
-import { ObjectID } from 'typeorm';
 import { CreateBookDto } from './dto/create-book.dto';
 import { Book } from './book.entity';
 
@@ -12,11 +11,11 @@ export class BooksService {
     private bookRepository: BookRepository,
   ) {}
 
-  async getAllBooksByAuthor(authorId: ObjectID): Promise<Book[]> {
+  async getAllBooksByAuthor(authorId: string): Promise<Book[]> {
     return await this.bookRepository.getAllBooksByAuthor(authorId);
   }
 
-  async getBookById(authorId: ObjectID, id: ObjectID): Promise<Book> {
+  async getBookById(authorId: string, id: string): Promise<Book> {
     const found = await this.bookRepository.findOne(id);
 
     if (!found || found.author !== authorId) {
@@ -27,15 +26,15 @@ export class BooksService {
   }
 
   async createBook(
-    authorId: ObjectID,
+    authorId: string,
     createBookDto: CreateBookDto,
   ): Promise<Book> {
     return await this.bookRepository.createBook(authorId, createBookDto);
   }
 
   async updateBook(
-    authorId: ObjectID,
-    bookId: ObjectID,
+    authorId: string,
+    bookId: string,
     createBookDto: CreateBookDto,
   ): Promise<string> {
     return await this.bookRepository.updateBook(
@@ -45,7 +44,7 @@ export class BooksService {
     );
   }
 
-  async deleteBook(authorId: ObjectID, id: ObjectID): Promise<void> {
+  async deleteBook(authorId: string, id: string): Promise<void> {
     const result = await this.bookRepository.delete(id);
 
     // doesn't work with typeorm&mongo
