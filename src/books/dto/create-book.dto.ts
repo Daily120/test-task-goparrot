@@ -3,7 +3,7 @@ import {
   Length,
   IsNumberString,
   IsDateString,
-} from '../../../node_modules/class-validator';
+} from 'class-validator';
 
 export class CreateBookDto {
   @IsNotEmpty()

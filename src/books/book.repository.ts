@@ -2,7 +2,7 @@ import {
   EntityRepository,
   Repository,
   ObjectID,
-} from '../../node_modules/typeorm';
+} from 'typeorm';
 import { Book } from './book.entity';
 import { CreateBookDto } from './dto/create-book.dto';
 

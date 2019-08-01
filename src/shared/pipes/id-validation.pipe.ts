@@ -1,7 +1,7 @@
 import {
   PipeTransform,
   BadRequestException,
-} from '../../../node_modules/@nestjs/common';
+} from '@nestjs/common';
 import { ObjectID } from 'mongodb';
 
 export class IdValidationPipe implements PipeTransform {

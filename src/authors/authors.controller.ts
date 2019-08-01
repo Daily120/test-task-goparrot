@@ -16,7 +16,7 @@ import { ObjectID, UpdateResult } from 'typeorm';
 import { IdValidationPipe } from '../shared/pipes/id-validation.pipe';
 import { CreateAuthorDto } from './dto/create-author.dto';
 
-@Controller()
+@Controller('api/authors')
 export class AuthorsController {
   constructor(private authorsService: AuthorsService) {}
 

@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { AuthorsService } from './authors.service';
 import { AuthorRepository } from './author.repository';
-import { NotFoundException } from '../../node_modules/@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 
 const mockAuthorRepository = () => ({
   getAllAuthors: jest.fn(),

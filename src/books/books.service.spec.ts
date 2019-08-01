@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { BooksService } from './books.service';
 import { BookRepository } from './book.repository';
-import { NotFoundException } from '../../node_modules/@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 import { Book } from './book.entity';
 
 const mockBookRepository = () => ({

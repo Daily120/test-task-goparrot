@@ -11,12 +11,12 @@ import {
   Put,
 } from '@nestjs/common';
 import { BooksService } from './books.service';
-import { ObjectID } from '../../node_modules/typeorm';
+import { ObjectID } from 'typeorm';
 import { IdValidationPipe } from '../shared/pipes/id-validation.pipe';
 import { CreateBookDto } from './dto/create-book.dto';
 import { Book } from './book.entity';
 
-@Controller()
+@Controller('api/authors/:authorId/books')
 export class BooksController {
   constructor(private booksService: BooksService) {}
 

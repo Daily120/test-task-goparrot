@@ -3,7 +3,7 @@ import {
   EntityRepository,
   UpdateResult,
   ObjectID,
-} from '../../node_modules/typeorm';
+} from 'typeorm';
 import { Author } from './author.entity';
 import { CreateAuthorDto } from './dto/create-author.dto';
 
