@@ -48,7 +48,6 @@ export class BookRepository extends Repository<Book> {
   ) {
     await this.update(id, {
       ...createBookDto,
-      author: authorId,
       updatedAt: new Date().toISOString(),
     });
 

@@ -10,6 +10,20 @@ import { NotFoundException } from '../../node_modules/@nestjs/common';
 
 @EntityRepository(Author)
 export class AuthorRepository extends Repository<Author> {
+  async getAllAuthors(): Promise<Author[]> {
+    return await this.find();
+  }
+
+  async getAuthorById(id: ObjectID): Promise<Author> {
+    const found = await this.findOne(id);
+
+    if (!found) {
+      throw new NotFoundException(`Author with ID "${id}" not found`);
+    }
+
+    return found;
+  }
+
   async createAuthor(createAuthorDto: CreateAuthorDto): Promise<Author> {
     const { firstName, lastName, birthday } = createAuthorDto;
 
