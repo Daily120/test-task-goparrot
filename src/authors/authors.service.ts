@@ -2,8 +2,9 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { AuthorRepository } from './author.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Author } from './author.entity';
-import { UpdateResult } from 'typeorm';
+import { UpdateResult, getMongoManager } from 'typeorm';
 import { CreateAuthorDto } from './dto/create-author.dto';
+import { Book } from '../books/book.entity';
 
 @Injectable()
 export class AuthorsService {
@@ -38,11 +39,15 @@ export class AuthorsService {
   }
 
   async deleteAuthor(id: string): Promise<void> {
-    const result = await this.authorRepository.delete(id);
+    const manager = getMongoManager();
+    const author = await this.getAuthorById(id);
 
-    // doesn't work with typeorm&mongo
-    if (result.affected === 0) {
+    if (!author) {
       throw new NotFoundException(`Task with ID "${id}" not found`);
     }
+
+    await this.authorRepository.remove(author);
+
+    await manager.deleteMany(Book, { author: id});
   }
 }

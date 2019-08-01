@@ -7,8 +7,9 @@ import {
   UpdateDateColumn,
   CreateDateColumn,
   OneToMany,
+  AfterRemove,
+  getMongoManager,
 } from 'typeorm';
-import { Book } from '../books/book.entity';
 
 @Entity()
 export class Author extends BaseEntity {
